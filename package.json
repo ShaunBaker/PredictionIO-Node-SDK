@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "description": "PredictionIO Node SDK",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "tap ./test"
+  },
   "repository": {
     "type": "git",
     "url": "git://github.com/ShaunBaker/PredictionIO-Node-SDK.git"
@@ -23,5 +25,8 @@
   "dependencies": {
     "superagent": "~0.15.7",
     "commander": "~2.0.0"
+  },
+  "bin": {
+    "predictionio": "./bin/predictionio"
   }
 }
