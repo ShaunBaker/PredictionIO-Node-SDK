@@ -1,0 +1,27 @@
+{
+  "name": "PredictionIO-Node-SDK",
+  "version": "0.0.0",
+  "description": "PredictionIO Node SDK",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ShaunBaker/PredictionIO-Node-SDK.git"
+  },
+  "homepage": "http://prediction.io",
+  "author": "ShaunBaker",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ShaunBaker/PredictionIO-Node-SDK/issues"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "tap": "~0.4.4"
+  },
+  "dependencies": {
+    "superagent": "~0.15.7",
+    "commander": "~2.0.0"
+  }
+}
