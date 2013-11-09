@@ -1,6 +1,6 @@
 {
   "name": "PredictionIO-Node-SDK",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "PredictionIO Node SDK",
   "main": "index.js",
   "scripts": {
