@@ -214,7 +214,7 @@ program
 
     if (options.extras) obj.pio_any_string = options.extras
 
-    api.users2items.create(obj, function (err, res) {
+    api.users.createAction(obj, function (err, res) {
       
       console.log(err, res)
 
@@ -305,13 +305,6 @@ program
     })
 
   })
-
-
-program
-  .command('*')
-  .action(function (env) {
-    console.log('deploying "%s"', env);
-  });
 
 
 program.parse(process.argv)
