@@ -1,0 +1,311 @@
+#!/usr/bin/env node
+
+
+var prediction = require('../index.js')
+  , path = require('path')
+  , program = require('commander')
+  , pkg = require('../package.json')
+  , version = pkg.version
+
+
+program
+  .version(version)
+  .option('-d, --data <file>', 'Use data')
+  .option('-k, --key <appkey>', 'App Key')
+
+
+program
+  .command('createUser [uid]')
+  .description('Create a new user')
+  .option("-u, --uid [uid]", "UID for new user")
+  .option("-i, --inactive [inactive]", "Inactive flag for user")
+  .option("-l, --latlon [latlon]", "Lat/Lon pair for user")
+  .option("-e, --extras [extras]", "Extra data to be stored with user")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID is required')
+
+    var api = new prediction(options.parent.key)
+      , obj = {}
+
+    obj.pio_uid = options.uid
+
+    if (options.inactive) obj.pio_inactive = options.inactive
+
+    if (options.latlon) obj.pio_latlng = options.latlon
+
+    if (options.extras) obj.pio_any_string = options.extras
+
+    api.users.create(obj, function (err, res) {
+      
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('getUser [uid]')
+  .description('Fetch a user')
+  .option("-u, --uid [uid]", "UID for user to fetch")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID is required')
+
+    var api = new prediction(options.parent.key)
+    
+    api.users.get(options.uid, function (err, res) {
+      
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('deleteUser [uid]')
+  .description('Delete a user')
+  .option("-u, --uid [uid]", "UID for user to delete")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID is required')
+
+    var api = new prediction(options.parent.key)
+    
+    api.users.remove(options.uid, function (err, res) {
+      
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('createItem [uid]')
+  .description('Create a new item')
+  .option("-u, --uid [uid]", "UID for new item")
+  .option("-t, --types [types]", "Types for item")
+  .option("-i, --inactive [inactive]", "Inactive flag for item")
+  .option("-l, --latlon [latlon]", "Lat/Lon pair for item")
+  .option("-x, --extras [extras]", "Extra data to be stored with item")
+  .option("-s, --start [startdate]", "Start date for item")
+  .option("-e, --end [enddate]", "End date for item")
+  .option("-p, --price [price]", "Price for item")
+  .option("--profit [profit]", "Profit for item")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID is required')
+
+    var api = new prediction(options.parent.key)
+      , obj = {}
+
+    obj.pio_uid = options.uid
+
+    if (options.types) obj.pio_itypes = options.types
+
+    if (options.inactive) obj.pio_inactive = options.inactive
+
+    if (options.latlon) obj.pio_latlng = options.latlon
+
+    if (options.extras) obj.pio_any_string = options.extras
+
+    if (options.startdate) obj.pio_startT = options.startdate
+
+    if (options.enddate) obj.pio_endT = options.enddate
+
+    if (options.price) obj.pio_price = options.price
+
+    if (options.profit) obj.pio_profit = options.profit
+
+    api.items.create(obj, function (err, res) {
+      
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('getItem [uid]')
+  .description('Fetch a user')
+  .option("-u, --uid [uid]", "UID for item to fetch")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID is required')
+
+    var api = new prediction(options.parent.key)
+    
+    api.items.get(options.uid, function (err, res) {
+      
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('deleteItem [uid]')
+  .description('Delete an item')
+  .option("-u, --uid [uid]", "UID for item to delete")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID is required')
+
+    var api = new prediction(options.parent.key)
+    
+    api.items.remove(options.uid, function (err, res) {
+      
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('createAction [uid]')
+  .description('Create a new action')
+  .option("-u, --uid [uid]", "UID for new action")
+  .option("-i, --itemuid [itemuid]", "ID of item")
+  .option("-a, --action [action]", "Name of action")
+  .option("-r, --rating [rating]", "Rating of action")
+  .option("-l, --latlon [latlon]", "Lat/Lon pair for action")
+  .option("-e, --extras [extras]", "Extra data to be stored with action")
+  .option("-t, --timestamp [timestamp]", "Timestamp of action")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID of user is required')
+
+    if (!options.itemuid) return console.log('UID of item is required')
+
+    var api = new prediction(options.parent.key)
+      , obj = {}
+
+    obj.pio_uid = options.uid
+
+    if (options.itemuid) obj.pio_uid = options.uid
+
+    if (options.action) obj.pio_action = options.action
+
+    if (options.rating) obj.pio_rating = options.rating
+
+    if (options.latlon) obj.pio_latlng = options.latlon
+
+    if (options.timestamp) obj.pio_timestamp = options.timestamp
+
+    if (options.extras) obj.pio_any_string = options.extras
+
+    api.users.createAction(obj, function (err, res) {
+      
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('getRecommendations')
+  .description('Create a new action')
+  .option("-u, --uid [uid]", "UID for user")
+  .option("-n, --results [results]", "Number of results")
+  .option("-t, --types [types]", "Types")
+  .option("-l, --latlon [latlon]", "Lat/Lon")
+  .option("-w, --within [within]", "Within radius")
+  .option("-u, --unit [unit]", "Unit")
+  .option("-a, --attributes [attributes]", "Attributes")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID of user is required')
+
+    var api = new prediction(options.parent.key)
+      , obj = {}
+
+    obj.pio_uid = options.uid
+   
+    obj.pio_n = options.results || 10
+
+    if (options.types) obj.pio_itypes = options.types
+
+    if (options.latlon) obj.pio_latlng = options.latlon
+
+    if (options.within) obj.pio_within = options.within
+
+    if (options.unit) obj.pio_unit = options.unit
+
+    if (options.attributes) obj.pio_attributes = options.attributes
+
+    api.items.recommendation(obj, function (err, res) {
+
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program
+  .command('getSimilar')
+  .description('Get a similiar result set')
+  .option("-u, --uid [uid]", "UID for user")
+  .option("-n, --results [results]", "Number of results")
+  .option("-t, --types [types]", "Types")
+  .option("-l, --latlon [latlon]", "Lat/Lon")
+  .option("-w, --within [within]", "Within radius")
+  .option("-u, --unit [unit]", "Unit")
+  .option("-a, --attributes [attributes]", "Attributes")
+  .action(function (env, options) {
+
+    if (!options.parent.key) return console.log('App Key required')
+
+    if (!options.uid) return console.log('UID of user is required')
+
+    var api = new prediction(options.parent.key)
+      , obj = {}
+
+    obj.pio_uid = options.uid
+   
+    obj.pio_n = options.results || 10
+
+    if (options.types) obj.pio_itypes = options.types
+
+    if (options.latlon) obj.pio_latlng = options.latlon
+
+    if (options.within) obj.pio_within = options.within
+
+    if (options.unit) obj.pio_unit = options.unit
+
+    if (options.attributes) obj.pio_attributes = options.attributes
+   
+    api.items.recommendation(obj, function (err, res) {
+
+      console.log(err, res)
+
+    })
+
+  })
+
+
+program.parse(process.argv)
+
