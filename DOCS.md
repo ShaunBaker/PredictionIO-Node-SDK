@@ -184,6 +184,8 @@ prediction.users.createAction({
 ```
 
 ### Fetch Similar for User
+
+```javascript
   prediction.items.similarity({
     pio_uid: 14
     , pio_n: 20
