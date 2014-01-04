@@ -498,7 +498,7 @@ describe('Test Item functions', function () {
 
       boot.items.similarity({
         pio_engine: 'test'
-        , pio_uid: 999
+        , pio_iid: 999
         , pio_n: 20
         , pio_itypes: ''
         , pio_latlng: ''
@@ -519,7 +519,7 @@ describe('Test Item functions', function () {
 
       boot.items.similarity({
         pio_engine: 'test'
-        , pio_uid: 999
+        , pio_iid: 999
         , pio_n: 20
         , pio_itypes: ''
         , pio_latlng: ''
