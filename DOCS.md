@@ -232,3 +232,23 @@ prediction.users.createAction({
     console.log(res)
   })
 ```
+
+###Rank items for User
+
+```javascript
+  prediction.items.rank({
+    pio_uid: 14
+    , pio_iid: '14,15'
+    , pio_attributes: ''
+  }, function (err, res) {
+    console.log(err, res)
+  })
+
+  prediction.items.recommendation({
+    pio_uid: 14
+    , pio_iid: '14,15'
+    , pio_attributes: ''
+  }).then(function (res) {
+    console.log(res)
+  })
+```
