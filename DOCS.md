@@ -52,7 +52,7 @@ The module works using both the traditional callback style and with promises.
   prediction.users.get(14, function (err, res) {
     console.log(err, res)
   })
-  
+
   prediction.users.get(14).then(function (res) {
     console.log(res)
   })
@@ -64,7 +64,7 @@ The module works using both the traditional callback style and with promises.
   prediction.users.remove(14, function (err, res) {
     console.log(err, res)
   })
-  
+
   prediction.users.remove(14).then(function (res) {
     console.log(res)
   })
@@ -169,7 +169,7 @@ prediction.users.createAction({
   }, function (err, res) {
     console.log(err, res)
   })
-  
+
   prediction.items.recommendation({
     pio_uid: 14
     , pio_n: 20
@@ -205,6 +205,28 @@ prediction.users.createAction({
     , pio_latlng: ''
     , pio_within: ''
     , pio_unit: ''
+    , pio_attributes: ''
+  }).then(function (res) {
+    console.log(res)
+  })
+```
+
+###Rank items for User
+
+```javascript
+  prediction.items.rank({
+    pio_uid: 14
+    , pio_iid: '14,15'
+    , pio_itypes: ''
+    , pio_attributes: ''
+  }, function (err, res) {
+    console.log(err, res)
+  })
+
+  prediction.items.recommendation({
+    pio_uid: 14
+    , pio_iid: '14,15'
+    , pio_itypes: ''
     , pio_attributes: ''
   }).then(function (res) {
     console.log(res)
